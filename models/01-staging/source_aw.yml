@@ -1,0 +1,128 @@
+version: 2
+
+sources:
+  - name: sources_aw
+    database: fea_academy 
+    schema: adventure_works
+
+    tables:
+      - name: person_person
+        columns:
+          - name: BusinessEntityID
+            tests:
+              - unique
+              - not_null
+
+          - name: FirstName
+            tests:
+              - not_null
+
+          - name: LastName
+            tests:
+              - not_null
+
+      - name: production_product
+        columns:
+          - name: ProductID
+            tests:
+            - unique
+            - not_null
+
+      - name: production_productcategory
+        columns:
+          - name: ProductCategoryID
+            tests:
+            - unique
+            - not_null
+
+          - name: Name
+            tests:
+            - not_null
+
+      - name: production_productsubcategory
+        columns:
+          - name: ProductSubcategoryID
+            tests:
+            - unique
+            - not_null
+
+          - name: ProductCategoryID
+            tests:
+            - not_null
+
+          - name: Name
+            tests:
+            - not_null
+
+      - name: production_productmodel
+        columns:
+          - name: ProductModelID
+
+      - name: sales_salesorderheader
+        columns:
+          - name: SalesOrderID
+            tests:
+            - unique
+            - not_null
+          - name: CustomerID
+            tests:
+            - not_null
+
+      - name: sales_salesorderdetail
+        columns:
+          - name: SalesOrderID
+            tests:
+            - not_null
+
+          - name: SalesOrderDetailID
+            tests:
+            - unique
+            - not_null
+            
+          - name: ProductID
+            tests:
+            - not_null
+
+      - name: sales_customer
+        columns:
+          - name: CustomerID
+            tests:
+            - unique
+            - not_null
+
+      - name: sales_salesorderheadersalesreason
+        columns:
+          - name: SalesOrderID
+            tests:
+            - not_null
+          - name: SalesReasonID
+            tests:
+            - not_null
+
+      - name: sales_salesperson
+        columns:
+          - name: BusinessEntityID
+            tests:
+            - not_null
+
+      - name: sales_salesreason
+        columns:
+          - name: SalesReasonID
+            tests:
+            - unique
+            - not_null
+
+      - name: sales_salesterritory
+        columns:
+          - name: TerritoryID
+            tests:
+            - unique
+            - not_null
+
+      - name: sales_store
+        columns:
+          - name: BusinessEntityID
+            tests:
+            - unique
+            - not_null
+            
