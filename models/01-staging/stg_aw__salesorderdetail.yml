@@ -1,0 +1,82 @@
+version: 2
+
+models:
+  - name: stg_aw__salesorderdetail
+    description: "Staging model for sales order details from API"
+    
+    columns:
+      - name: sales_order_id
+        description: "Primary key. Foreign key to SalesOrderHeader.SalesOrderID."
+        tests:
+          - not_null
+
+      - name: sales_order_fk
+        description: "Foreign key referring to stg_aw__salesorderheader."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_aw__salesorderheader')
+              field: sales_order_sk
+          
+      - name: sales_order_detail_id
+        description: "Primary key. One incremental unique number per product sold."
+        tests:
+          - unique
+          - not_null
+
+      - name: sales_sk
+        description: "Surrogate key for sales order detail."
+        tests:
+          - unique
+          - not_null
+          
+      - name: carrier_tracking_number
+        description: "Shipment tracking number supplied by the shipper."
+
+      - name: order_quantity
+        description: "Quantity ordered"
+        tests:
+          - not_null
+
+      - name: product_id
+        description: "Product sold to customer. Foreign key to Product.ProductID."
+        tests:
+          - not_null
+
+      - name: product_fk
+        description: "Foreign key referring to stg_product."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_aw__product')
+              field: product_sk
+          
+      - name: special_offer_id
+        description: "Promotional code. Foreign key to SpecialOffer.SpecialOfferID."
+        tests:
+          - not_null
+          
+      - name: unit_price
+        description: "Selling price of a single product."
+        tests:
+          - not_null
+          
+      - name: unit_price_discount
+        description: "Discount amount."
+        
+      - name: rowguid
+        description: "ROWGUIDCOL number uniquely identifying the record. Used to support a merge replication sample."
+        tests:
+          - unique
+          - not_null
+          
+      - name: modified_date
+        description: "Date and time the record was last updated."
+        tests:
+          - not_null
+
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - sales_order_detail_id
+            - sales_sk

@@ -1,0 +1,70 @@
+version: 2
+
+models:
+  - name: stg_aw__person
+    description: "Staging model for persons from database"
+    
+    columns:
+      - name: person_id
+        description: "Primary key for Person records. Foreign key to BusinessEntity.BusinessEntityID."
+        tests:
+          - unique
+          - not_null
+
+      - name: person_sk
+        description: "Surrogate key for person."
+        tests:
+          - unique
+          - not_null
+          
+      - name: person_type
+        description: "Primary type of person: SC = Store Contact, IN = Individual (retail) customer, SP = Sales person, EM = Employee (non-sales), VC = Vendor contact, GC = General contact"
+        tests:
+          - not_null
+          
+      - name: name_style
+        description: "0 = The data in FirstName and LastName are stored in western style (first name, last name) order. 1 = Eastern style (last name, first name) order."
+        tests:
+          - not_null
+          
+      - name: title
+        description: "A courtesy title. For example, Mr. or Ms."
+        
+      - name: first_name
+        description: "First name of the person."
+        tests:
+          - not_null
+          
+      - name: middle_name
+        description: "Middle name or middle initial of the person."
+        
+      - name: last_name
+        description: "Last name of the person."
+        tests:
+          - not_null
+          
+      - name: suffix
+        description: "Surname suffix. For example, Sr. or Jr."
+        
+      - name: email_promotion
+        description: "0 = Contact does not wish to receive e-mail promotions, 1 = Contact does wish to receive e-mail promotions from AdventureWorks, 2 = Contact does wish to receive e-mail promotions from AdventureWorks and selected partners."
+        tests:
+          - not_null
+          
+      - name: additional_contact_info
+        description: "Additional contact information about the person stored in xml format."
+        
+      - name: demographics
+        description: "Personal information such as hobbies, and income collected from online shoppers. Used for sales analysis."
+        
+      - name: rowguid
+        description: "ROWGUIDCOL number uniquely identifying the record. Used to support a merge replication sample."
+          
+      - name: modified_date
+        description: "Date and time the record was last updated."
+
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - person_id
+            - person_sk

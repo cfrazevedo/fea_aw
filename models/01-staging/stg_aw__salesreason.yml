@@ -1,0 +1,27 @@
+version: 2
+
+models:
+  - name: stg_aw__salesreason
+    description: "Staging model for sales reasons from database"
+    
+    columns:
+      - name: sales_reason_id
+        description: "Primary key for SalesReason records."
+        tests:
+          - unique
+          - not_null
+          
+      - name: sales_reason_name
+        description: "Sales reason description."
+        tests:
+          - not_null
+          
+      - name: sales_reason_type
+        description: "Category the sales reason belongs to."
+        tests:
+          - not_null
+          
+      - name: modified_date
+        description: "Date and time the record was last updated."
+        tests:
+          - not_null

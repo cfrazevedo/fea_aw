@@ -1,0 +1,31 @@
+version: 2
+
+models:
+  - name: stg_aw__store
+    description: "Staging model for sales territories from database"
+    
+    columns:
+      - name: store_id
+        description: "Primary key for Store records. Foreign key to Employee.BusinessEntityID"
+        tests:
+          - unique
+          - not_null
+          
+      - name: store_name
+        description: "Sales territory description"
+        tests:
+          - not_null
+          
+      - name: sales_person_id
+        description: "Foreign key to SalesPerson.BusinessEntityID."
+        tests:
+          - not_null
+          
+      - name: demographics
+        description: "Personal information such as hobbies, and income collected from online shoppers. Used for sales analysis."
+        
+      - name: rowguid
+        description: "ROWGUIDCOL number uniquely identifying the record. Used to support a merge replication sample."
+          
+      - name: modified_date
+        description: "Date and time the record was last updated."

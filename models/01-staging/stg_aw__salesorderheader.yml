@@ -1,0 +1,131 @@
+version: 2
+
+models:
+  - name: stg_aw__salesorderheader
+    description: "Staging model for sales order headers from API"
+    
+    columns:
+      - name: sales_order_id
+        description: "Primary key. Unique sales order identification number."
+        tests:
+          - unique
+          - not_null
+
+      - name: sales_order_sk
+        description: "Surrogate key for sales order detail."
+        tests:
+          - unique
+          - not_null
+          
+      - name: revision_number
+        description: "Incremental number to track changes to the sales order over time."
+        
+      - name: order_date
+        description: "Dates the sales order was created."
+        tests:
+          - not_null
+          
+      - name: due_date 
+        description: "Date the order is due to the customer."
+        tests:
+          - not_null
+          
+      - name: ship_date
+        description: "Date the order was shipped to the customer."
+        
+      - name: status
+        description: "Order current status. 1 = In process; 2 = Approved; 3 = Backordered; 4 = Rejected; 5 = Shipped; 6 = Cancelled"
+        tests:
+          - not_null
+        
+      - name: online_order_flag
+        description: "0 = Order placed by sales person. 1 = Order placed online by customer."
+          
+      - name: purchase_order_number
+        description: "Customer purchase order number reference."          
+
+      - name: account_number
+        description: "Financial accounting number reference."
+          
+      - name: customer_id
+        description: "Customer identification number. Foreign key to Customer.BusinessEntityID."
+        tests:
+          - not_null
+
+      - name: customer_fk
+        description: "Foreign key referring to stg_customers."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_aw__customers')
+              field: customer_sk
+          
+      - name: sales_person_id
+        description: "Sales person who created the sales order. Foreign key to SalesPerson.BusinessEntityID."
+        
+      - name: territory_id
+        description: "Territory in which the sale was made. Foreign key to SalesTerritory.SalesTerritoryID."
+        
+      - name: bill_to_address_id
+        description: "Customer billing address. Foreign key to Address.AddressID."
+        tests:
+          - not_null
+          
+      - name: ship_to_address_id
+        description: "Customer shipping address. Foreign key to Address.AddressID."
+        tests:
+          - not_null
+          
+      - name: ship_method_id
+        description: "Shipping method. Foreign key to ShipMethod.ShipMethodID."
+        tests:
+          - not_null
+          
+      - name: credit_card_id
+        description: "Credit card identification number. Foreign key to CreditCard.CreditCardID."
+        
+      - name: credit_card_approval_code
+        description: "Approval code provided by the credit card company."
+        
+      - name: currency_rate_id
+        description: "Currency exchange rate used. Foreign key to CurrencyRate.CurrencyRateID."
+        
+      - name: sub_total
+        description: "Sales order subtotal. Computed as SUM(SalesOrderDetail.LineTotal) for the appropriate SalesOrderID."
+        tests:
+          - not_null
+          
+      - name: tax_amount
+        description: "Tax amount."
+        tests:
+          - not_null
+          
+      - name: freight
+        description: "Shipping cost."
+        tests:
+          - not_null
+          
+      - name: total_due
+        description: "Total due from customer. Computed as Subtotal + TaxAmt + Freight."
+        tests:
+          - not_null
+          
+      - name: comment
+        description: "Sales representative comments."
+        
+      - name: rowguid
+        description: "ROWGUIDCOL number uniquely identifying the record. Used to support a merge replication sample."
+        tests:
+          - unique
+          - not_null
+        
+      - name: modified_date
+        description: "Date and time the record was last updated."
+        tests:
+          - not_null
+
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - sales_order_id
+            - sales_order_sk

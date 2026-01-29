@@ -1,0 +1,120 @@
+version: 2
+
+models:
+  - name: stg_aw__product
+    description: "Staging model for products from database"
+    
+    columns:
+      - name: product_id
+        description: "Primary key for Product records."
+        tests:
+          - unique
+          - not_null
+
+      - name: product_sk
+        description: "Surrogate key for Product."
+        tests:
+          - unique
+          - not_null
+          
+      - name: product_name
+        description: "Name of the product."
+        tests:
+          - not_null
+          
+      - name: product_number
+        description: "Unique product identification number."
+        tests:
+          - unique
+          - not_null
+          
+      - name: make_flag
+        description: "0 = Product is purchased, 1 = Product is manufactured in-house."
+        tests:
+          - not_null
+          
+      - name: finished_goods_flag
+        description: "0 = Product is not a salable item. 1 = Product is salable."
+        tests:
+          - not_null
+          
+      - name: color
+        description: "Product color."
+        
+      - name: safety_stock_level
+        description: "Minimum inventory quantity."
+        tests:
+          - not_null
+          
+      - name: reorder_point
+        description: "Inventory level that triggers a purchase order or work order."
+        tests:
+          - not_null
+          
+      - name: standard_cost
+        description: "Standard cost of the product."
+        tests:
+          - not_null
+          
+      - name: list_price
+        description: "Selling price."
+        tests:
+          - not_null
+        
+      - name: size
+        description: "Product size."
+        
+      - name: size_unit_measure_code
+        description: "Unit of measure for the Size column."
+        
+      - name: weight_unit_measure_code
+        description: "Unit of measure for the Weight column."
+        
+      - name: weight
+        description: "Product weight."
+          
+      - name: days_to_manufacture
+        description: "Number of days required to manufacture the product."
+        
+      - name: product_line
+        description: "R = Road, M = Mountain, T = Touring, S = Standard"
+        
+      - name: product_class
+        description: "H = High, M = Medium, L = Low"
+        
+      - name: product_style
+        description: "W = Womens, M = Mens, U = Universal"
+        
+      - name: product_subcategory_id
+        description: "Product is a member of this product subcategory. Foreign key to ProductSubCategory.ProductSubCategoryID."
+        
+      - name: product_model_id
+        description: "Product is a member of this product model. Foreign key to ProductModel.ProductModelID."
+        
+      - name: sell_start_date
+        description: "Date the product was available for sale."
+        tests:
+          - not_null
+          
+      - name: sell_end_date
+        description: "Date the product was no longer available for sale."
+        
+      - name: discontinued_date
+        description: "Date the product was discontinued."
+        
+      - name: rowguid
+        description: "ROWGUIDCOL number uniquely identifying the record. Used to support a merge replication sample."
+        tests:
+          - unique
+          - not_null
+          
+      - name: modified_date
+        description: "Date and time the record was last updated."
+        tests:
+          - not_null
+
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - product_id
+            - product_sk

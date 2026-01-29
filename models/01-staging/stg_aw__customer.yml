@@ -1,0 +1,44 @@
+version: 2
+
+models:
+  - name: stg_aw__customer
+    description: "Staging model for customers from database"
+    
+    columns:
+      - name: customer_id
+        description: "Primary key. Customer identification number."
+        tests:
+          - unique
+          - not_null
+
+      - name: customer_sk
+        description: "Surrogate key for customer."
+        tests:
+          - unique
+          - not_null
+          
+      - name: person_id
+        description: "Foreign key to Person.BusinessEntityID"
+        
+      - name: store_id
+        description: "Foreign key to Store.BusinessEntityID"
+        
+      - name: territory_id
+        description: "ID of the territory in which the customer is located. Foreign key to SalesTerritory.SalesTerritoryID."
+          
+      - name: rowguid
+        description: "ROWGUIDCOL number uniquely identifying the record. Used to support a merge replication sample."
+        tests:
+          - unique
+          - not_null
+          
+      - name: modified_date
+        description: "Date and time the record was last updated."
+        tests:
+          - not_null
+
+    tests:
+        - dbt_utils.unique_combination_of_columns:
+            combination_of_columns:
+              - customer_id
+              - customer_sk

@@ -1,0 +1,21 @@
+version: 2
+
+models:
+  - name: stg_aw__salesorderheadersalesreason
+    description: "Staging model for sales order header sales reason mapping from database"
+    
+    columns:
+      - name: sales_order_id
+        description: "Primary key. Foreign key to SalesOrderHeader.SalesOrderID."
+        tests:
+          - not_null
+          
+      - name: sales_reason_id
+        description: "Primary key. Foreign key to SalesReason.SalesReasonID."
+        tests:
+          - not_null
+          
+      - name: modified_date
+        description: "Date and time the record was last updated."
+        tests:
+          - not_null

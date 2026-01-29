@@ -1,0 +1,41 @@
+version: 2
+
+models:
+  - name: stg_aw__salesperson
+    description: "Staging model for sales representatives from database"
+    
+    columns:
+      - name: sales_person_id
+        description: "Primary key for SalesPerson records. Foreign key to Employee.BusinessEntityID"
+        tests:
+          - unique
+          - not_null
+          
+      - name: territory_id
+        description: "Territory currently assigned to. Foreign key to SalesTerritory.SalesTerritoryID."
+        
+      - name: sales_quota
+        description: "Projected yearly sales."
+        
+      - name: bonus
+        description: "Bonus due if quota is met."
+        
+      - name: commission_pct
+        description: "Commision percent received per sale."
+        
+      - name: sales_ytd
+        description: "Sales total year to date."
+        
+      - name: sales_last_year
+        description: "Sales total of previous year."
+        
+      - name: rowguid
+        description: "ROWGUIDCOL number uniquely identifying the record. Used to support a merge replication sample."
+        tests:
+          - unique
+          - not_null
+          
+      - name: modified_date
+        description: "Date and time the record was last updated."
+        tests:
+          - not_null
