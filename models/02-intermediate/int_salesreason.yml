@@ -1,0 +1,57 @@
+version: 2
+
+models:
+  - name: int_salesreason
+    description: "Sales reasons from database"
+    
+    columns:
+      - name: sales_order_id
+        description: "Primary key. Foreign key to SalesOrderHeader.SalesOrderID."
+        tests:
+          - not_null
+          
+      - name: sales_reason_id
+        description: "Primary key for SalesReason records."
+        tests:
+          - not_null
+          
+      - name: sales_reason_name
+        description: "Sales reason description."
+        tests:
+          - not_null
+          
+      - name: sales_reason_type
+        description: "Category the sales reason belongs to."
+        tests:
+          - not_null
+          
+      - name: source_updated_at
+        description: "Timestamp of the last update of the record in the original data source."
+        tests:
+          - not_null
+
+      - name: sales_reason_sk
+        description: "Surrogate key for the sales reason dimension, generated from 'sales_order_id' and 'sales_reason_id'."
+        tests:
+          - not_null
+          - unique
+          
+      - name: sales_order_fk
+        description: "Foreign key referring to stg_api__salesorderheader."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_aw__salesorderheader')
+              field: sales_order_sk
+
+    tests:
+        - dbt_utils.unique_combination_of_columns:
+            combination_of_columns:
+              - sales_order_id
+              - sales_reason_id
+              - sales_reason_sk
+
+        - dbt_utils.unique_combination_of_columns:
+            combination_of_columns:
+              - sales_order_id
+              - sales_order_fk

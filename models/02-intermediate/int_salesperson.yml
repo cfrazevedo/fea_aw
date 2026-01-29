@@ -1,0 +1,47 @@
+version: 2
+
+models:
+  - name: int_salesperson
+    description: "Sales representatives from database"
+    
+    columns:
+      - name: sales_person_id
+        description: "Primary key for SalesPerson records. Foreign key to Employee.BusinessEntityID"
+        tests:
+          - unique
+          - not_null
+
+      - name: person_type
+        description: "Primary type of person: SC = Store Contact, IN = Individual (retail) customer, SP = Sales person, EM = Employee (non-sales), VC = Vendor contact, GC = General contact"
+        tests:
+          - not_null
+
+      - name: first_name
+        description: "First name of the person."
+        tests:
+          - not_null
+
+      - name: last_name
+        description: "Last name of the person."
+        tests:
+          - not_null
+        
+      - name: sales_quota
+        description: "Projected yearly sales."
+        
+      - name: bonus
+        description: "Bonus due if quota is met."
+        
+      - name: commission_pct
+        description: "Commision percent received per sale."
+        
+      - name: sales_ytd
+        description: "Sales total year to date."
+        
+      - name: sales_last_year
+        description: "Sales total of previous year."
+          
+      - name: source_updated_at
+        description: "Timestamp of the last update of the record in the original data source."
+        tests:
+          - not_null

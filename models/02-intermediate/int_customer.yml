@@ -1,0 +1,35 @@
+version: 2
+
+models:
+  - name: int_customer
+    description: "Customers from database"
+    
+    columns:
+      - name: customer_sk
+        description: "Surrogate key for customer."
+        tests:
+          - unique
+          - not_null
+          
+      - name: customer_id
+        description: "Primary key. Customer identification number."
+        tests:
+          - unique
+          - not_null
+          
+      - name: person_id
+        description: "Foreign key to Person.BusinessEntityID."
+        
+      - name: store_id
+        description: "Foreign key to Store.BusinessEntityID."
+
+      - name: store_name
+        description: "Name of the store."
+        
+      - name: territory_id
+        description: "ID of the territory in which the customer is located. Foreign key to SalesTerritory.SalesTerritoryID."
+          
+      - name: source_updated_at
+        description: "Timestamp of the last update of the record in the original data source."
+        tests:
+          - not_null
