@@ -10,7 +10,6 @@ with
 
         select
             cast(businessentityid as string) as person_id
-            , {{ dbt_utils.generate_surrogate_key(['person_id']) }} as person_sk
             , cast(persontype as string) as person_type
             , cast(namestyle as string) as name_style
             , cast(title as string) as title

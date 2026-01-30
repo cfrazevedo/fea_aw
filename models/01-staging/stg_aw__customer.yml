@@ -10,12 +10,6 @@ models:
         tests:
           - unique
           - not_null
-
-      - name: customer_sk
-        description: "Surrogate key for customer."
-        tests:
-          - unique
-          - not_null
           
       - name: person_id
         description: "Foreign key to Person.BusinessEntityID"
@@ -36,9 +30,3 @@ models:
         description: "Date and time the record was last updated."
         tests:
           - not_null
-
-    tests:
-        - dbt_utils.unique_combination_of_columns:
-            combination_of_columns:
-              - customer_id
-              - customer_sk

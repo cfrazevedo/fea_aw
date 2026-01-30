@@ -11,12 +11,6 @@ models:
           - unique
           - not_null
 
-      - name: person_sk
-        description: "Surrogate key for person."
-        tests:
-          - unique
-          - not_null
-          
       - name: person_type
         description: "Primary type of person: SC = Store Contact, IN = Individual (retail) customer, SP = Sales person, EM = Employee (non-sales), VC = Vendor contact, GC = General contact"
         tests:
