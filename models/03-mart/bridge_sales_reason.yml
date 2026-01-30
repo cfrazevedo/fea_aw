@@ -1,0 +1,33 @@
+version: 2
+
+models:
+  - name: bridge_sales_reason
+    description: This model creates a bridge table between the dimension table `dim_sales_reason` and the fact table `fact_sales_orders`
+    columns:
+      - name: bridge_sales_reason_sk
+        description: "Surrogate key generated for the combination of sales_order_id, sales_reason_id, and sales_order_detail_id."
+        tests:
+          - not_null
+          - unique
+
+      - name: sales_reason_fk
+        description: "Foreigh key generated from the combination of sales_order_id and sales_reason_id for dim_sales_reason."
+        tests:
+          - not_null
+
+      - name: updated_at
+        description: "Timestamp of the last update to the record."
+        tests:
+          - not_null
+
+      - name: sales_fk
+        description: "Foreigh key generated from sales_order_detail_id do fact_sales_orders."
+        tests:
+          - not_null
+
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - bridge_sales_reason_sk
+            - sales_reason_fk
+            - sales_fk

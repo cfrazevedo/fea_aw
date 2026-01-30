@@ -1,0 +1,104 @@
+
+version: 2
+
+models:
+  - name: dim_products
+    description: "Dimension table containing details about products."
+    columns:
+      - name: product_sk
+        description: "Surrogate key generated to uniquely identify each product."
+        tests:
+          - not_null
+          - unique
+
+      - name: product_id
+        description: "Unique identifier for the product in the source data."
+        tests:
+          - not_null
+          - unique
+          - dbt_utils.not_empty_string
+
+      - name: product_name
+        description: "Name of the product."
+
+      - name: make_flag
+        description: "0 = Product is purchased, 1 = Product is manufactured in-house."
+        tests:
+          - not_null
+
+      - name: product_style
+        description: "Short name of product style"
+
+      - name: style_name
+        description: "Name of product style"
+        tests:
+          - not_null
+
+      - name: style_name_sort_by
+        description: "Classification of product style"
+        tests:
+          - not_null
+
+      - name: product_subcategory_id
+        description: "Identifier for the product subcategory."
+        tests:
+          - not_null
+
+      - name: product_subcategory_name
+        description: "Name of the product subcategory."
+        tests:
+          - not_null
+
+      - name: product_category_id
+        description: "Identifier for the product category."
+        tests:
+          - not_null
+
+      - name: product_category_name
+        description: "Name of the product category."
+        tests:
+          - not_null
+
+      - name: product_line
+        description: "Short name of product line."
+
+      - name: product_line_name
+        description: "Name of product line."
+        tests:
+          - not_null
+
+      - name: product_line_name_sort_by
+        description: "Classification of product line."
+        tests:
+          - not_null
+
+      - name: product_model_id
+        description: "Model code of the product."
+        tests:
+          - not_null
+
+      - name: product_model_name
+        description: "Model name of the product."
+        tests:
+          - not_null
+
+      - name: standard_cost
+        description: "Standard cost of the product."
+
+      - name: unit_price
+        description: "Unit price of the product."
+
+      - name: profit
+        description: "Profit margin of the product."
+
+      - name: source_updated_at
+        description: "Timestamp of the last update in the source data."
+
+      - name: updated_at
+        description: "Timestamp of the last update in the dbt model."
+
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - product_id
+            - product_sk

@@ -1,0 +1,40 @@
+version: 2
+
+models:
+  - name: dim_customers
+    description: "This model creates a customer dimension table with a surrogate key and additional columns."
+    columns:
+      - name: customer_sk
+        description: "Surrogate key for the customer dimension."
+        tests:
+          - not_null
+          - unique
+    
+      - name: customer_id
+        description: "Primary key for the customer, sourced from the raw data."
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+      
+      - name: person_id
+        description: "Unique identifier for the person associated with the customer."
+        
+      - name: customer_name
+        description: "Name of the customer."
+
+      - name: store_id
+        description: "Unique identifier for the store associated with the customer."
+
+      - name: store_name
+        description: "Name of the store."
+
+      - name: territory_id
+        description: "Unique identifier for the territory associated with the customer."
+        tests:
+          - not_null
+
+      - name: source_updated_at
+        description: "Timestamp of when the source record was last updated."
+
+      - name: updated_at
+        description: "Timestamp of when the record was last updated in this model."

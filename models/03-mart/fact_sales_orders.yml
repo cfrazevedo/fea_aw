@@ -1,0 +1,92 @@
+version: 2
+
+models:
+  - name: fact_sales_orders
+    description: "A fact table containing sales transactions including details such as product, special offer, customer, and salesperson."
+    columns:
+      - name: sales_sk
+        description: "Surrogate key for sales transaction."
+        tests:
+          - unique
+          - not_null
+
+      - name: sales_order_fk
+        description: "Foreign key referring to dim_sales_cost."
+        tests:
+          - not_null
+
+      - name: product_fk
+        description: "Foreign key referring to dim_products."
+        tests:
+          - not_null
+
+      - name: customer_fk
+        description: "Foreign key referring to dim_customers."
+        tests:
+          - not_null
+
+      - name: sales_hierarchy_fk
+        description: "Foreign key referring to the dim_sales_hierarchy."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_sales_hierarchy')
+              field: sales_hierarchy_sk
+
+      - name: sales_person_id
+        description: "Identifier for the salesperson."
+
+      - name: territory_id
+        description: "Identifier for the sales territory."
+        tests:
+          - not_null
+
+      - name: order_quantity
+        description: "Quantity of items ordered."
+
+      - name: unit_price
+        description: "Price per unit."
+
+      - name: unit_price_discount_percentage
+        description: "Discount percentage applied to the unit price."
+
+      - name: unit_price_discount_value
+        description: "Discount value applied to sub total."
+
+      - name: total_net_sales_detail
+        description: "Total of products value (sub total)."
+
+      - name: standard_cost
+        description: "Standard cost per unit."
+        
+      - name: profit
+        description: "Profit per unit."
+
+      - name: order_date
+        description: "Date when the order was placed."
+        tests:
+          - not_null
+
+      - name: due_date
+        description: "Date the order is due to the customer."
+        tests:
+          - not_null
+          
+      - name: ship_date
+        description: "Date the order was shipped to the customer."
+      
+      - name: is_first_order
+        description: "Identify if that order is the first order."
+        tests:
+          - not_null
+      
+      - name: customer_type
+        description: "Identify if that customer is new (first order) or current (not first order)."
+        tests:
+          - not_null
+
+      - name: source_updated_at
+        description: "Timestamp when the source of stg_sales_order_detail data was last updated."
+
+      - name: updated_at
+        description: "Timestamp when the record was last updated."

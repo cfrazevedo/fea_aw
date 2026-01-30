@@ -1,0 +1,76 @@
+version: 2
+
+models:
+  - name: dim_sales_hierarchy # Nome do seu arquivo SQL (ex: int_sales_hierarchy.sql)
+    description: "This model generates surrogate keys for the sales hierarchy and combines sales order header information with sales territory details."
+
+    columns:
+      - name: sales_hierarchy_sk
+        description: "Surrogate key for the sales hierarchy, generated based on salesperson_id and territory_id."
+        tests:
+          - unique
+          - not_null
+      
+      - name: sales_person_id
+        description: "Identifier for the salesperson from the sales order header."
+
+      - name: sales_person_name
+        description: "Name of the salesperson."
+        tests:
+          - not_null
+      
+      - name: person_type
+        description: "Type of person associated with the salesperson, such as SC (Store Contact), IN (Individual), SP (Sales Person), EM (Employee), VC (Vendor Contact), GC (General Contact)."
+
+      - name: sales_quota
+        description: "Sales quota assigned to the salesperson."
+
+      - name: bonus
+        description: "Bonus amount for the salesperson."
+
+      - name: commission_pct
+        description: "Commission percentage for the salesperson."
+
+      - name: sales_ytd
+        description: "Year-to-date sales amount for the salesperson."
+
+      - name: sales_last_year
+        description: "Sales amount for the last year for the salesperson."
+
+      - name: territory_id
+        description: "Identifier for the sales territory from the sales order header."
+        tests:
+          - not_null
+
+      - name: territory_name
+        description: "Name of the sales territory."
+        tests:
+          - not_null
+
+      - name: country_region_code
+        description: "Country or region code of the sales territory."
+        tests:
+          - not_null
+
+      - name: country
+        description: "Country of the sales territory."
+        tests:
+          - not_null
+
+      - name: territory_group
+        description: "Group to which the sales territory belongs."
+        tests:
+          - not_null
+
+      - name: source_updated_at
+        description: "Timestamp of when the source record was last updated."
+
+      - name: updated_at
+        description: "Timestamp when the record was last updated in the model."
+
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - sales_hierarchy_sk
+            - sales_person_id
+            - territory_id
