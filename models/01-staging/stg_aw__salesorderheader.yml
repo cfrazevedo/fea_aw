@@ -10,12 +10,6 @@ models:
         tests:
           - unique
           - not_null
-
-      - name: sales_order_sk
-        description: "Surrogate key for sales order detail."
-        tests:
-          - unique
-          - not_null
           
       - name: revision_number
         description: "Incremental number to track changes to the sales order over time."
@@ -123,9 +117,3 @@ models:
         description: "Date and time the record was last updated."
         tests:
           - not_null
-
-    tests:
-      - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - sales_order_id
-            - sales_order_sk

@@ -9,14 +9,6 @@ models:
         description: "Primary key. Foreign key to SalesOrderHeader.SalesOrderID."
         tests:
           - not_null
-
-      - name: sales_order_fk
-        description: "Foreign key referring to stg_aw__salesorderheader."
-        tests:
-          - not_null
-          - relationships:
-              to: ref('stg_aw__salesorderheader')
-              field: sales_order_sk
           
       - name: sales_order_detail_id
         description: "Primary key. One incremental unique number per product sold."

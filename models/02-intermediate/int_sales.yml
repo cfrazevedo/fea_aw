@@ -11,11 +11,6 @@ models:
           - unique
           - not_null
 
-      - name: sales_order_fk
-        description: "Foreign key referring to sales order surrogated."
-        tests:
-          - not_null
-
       - name: product_fk
         description: "Foreign key referring to products surrogated."
         tests:

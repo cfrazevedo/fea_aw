@@ -25,7 +25,6 @@ with
 
         select
             stg_detail.sales_sk
-            , stg_detail.sales_order_fk
             , stg_detail.product_fk
             , stg_detail.sales_order_id
             , stg_detail.sales_order_detail_id

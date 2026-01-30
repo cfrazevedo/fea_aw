@@ -34,7 +34,6 @@ with
         select 
             *
             , {{ dbt_utils.generate_surrogate_key(['sales_order_id', 'sales_reason_id']) }} as sales_reason_sk
-            , {{ dbt_utils.generate_surrogate_key(['sales_order_id']) }} as sales_order_fk
             
         from join_salesreason
         

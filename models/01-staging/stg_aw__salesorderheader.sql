@@ -10,7 +10,6 @@ with
 
         select
             cast(salesorderid as string) as sales_order_id
-            , {{ dbt_utils.generate_surrogate_key(['sales_order_id']) }} as sales_order_sk
             , cast(revisionnumber as int) as revision_number
             , try_cast(orderdate as timestamp) as order_date
             , try_cast(duedate as timestamp) as due_date

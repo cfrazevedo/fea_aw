@@ -35,14 +35,7 @@ models:
         tests:
           - not_null
           - unique
-          
-      - name: sales_order_fk
-        description: "Foreign key referring to stg_api__salesorderheader."
-        tests:
-          - not_null
-          - relationships:
-              to: ref('stg_aw__salesorderheader')
-              field: sales_order_sk
+
 
     tests:
         - dbt_utils.unique_combination_of_columns:
@@ -50,8 +43,3 @@ models:
               - sales_order_id
               - sales_reason_id
               - sales_reason_sk
-
-        - dbt_utils.unique_combination_of_columns:
-            combination_of_columns:
-              - sales_order_id
-              - sales_order_fk

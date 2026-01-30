@@ -10,7 +10,6 @@ with
 
         select
             cast(salesorderid as string) as sales_order_id
-            , {{ dbt_utils.generate_surrogate_key(['sales_order_id']) }} as sales_order_fk
             , cast(salesorderdetailid as string) as sales_order_detail_id
             , {{ dbt_utils.generate_surrogate_key(['sales_order_detail_id']) }} as sales_sk
             , cast(carriertrackingnumber as string) as carrier_tracking_number
