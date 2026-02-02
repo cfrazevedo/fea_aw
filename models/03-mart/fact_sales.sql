@@ -7,7 +7,7 @@ with
 
     )
 
-    , first_order as (
+    , first_orders as (
 
         select 
             customer_id
@@ -22,14 +22,14 @@ with
         select
             sales.*
             , case
-                when first_order.first_order = sales.order_date
+                when first_orders.first_order = sales.order_date
                     then 'true'
                 else 'false'
             end as is_first_order
         
         from sales
-        left join first_order
-        on join_sales_order.customer_id = first_order.customer_id
+        left join first_orders
+        on sales.customer_id = first_orders.customer_id
 
     )
 

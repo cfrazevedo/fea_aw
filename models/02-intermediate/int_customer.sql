@@ -30,7 +30,7 @@ with
         
     )
 
-    generate_sk as (
+    , generate_sk as (
 
         select
             {{ dbt_utils.generate_surrogate_key(['join_customer.customer_id']) }} as customer_sk

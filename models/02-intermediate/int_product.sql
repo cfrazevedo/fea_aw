@@ -85,9 +85,9 @@ with
             , join_product_model.product_class
             , join_product_model.product_style
             , join_product_model.product_subcategory_id
-            , join_product_modelcategory.product_subcategory_name
-            , join_product_modelcategory.product_category_id
-            , join_product_modelcategory.product_category_name
+            , join_productcategory.product_subcategory_name
+            , join_productcategory.product_category_id
+            , join_productcategory.product_category_name
             , join_product_model.product_model_id
             , join_product_model.product_model_name
             , join_product_model.sell_start_date
@@ -101,7 +101,7 @@ with
         
     )
 
-    generate_sk as (
+    , generate_sk as (
 
         select
             {{ dbt_utils.generate_surrogate_key(['join_product.product_id']) }} as product_sk
