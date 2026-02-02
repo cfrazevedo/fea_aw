@@ -1,0 +1,44 @@
+version: 2
+
+models:
+  - name: int_salesterritory
+    description: "Sales territories from database"
+    
+    columns:
+      - name: territory_id
+        description: "Primary key for SalesTerritory records."
+        tests:
+          - unique
+          - not_null
+          
+      - name: territory_name
+        description: "Sales territory description"
+        tests:
+          - not_null
+          
+      - name: country_region_code
+        description: "ISO standard country or region code. Foreign key to CountryRegion.CountryRegionCode."
+        tests:
+          - not_null
+          
+      - name: territory_group
+        description: "Geographic area to which the sales territory belong."
+        tests:
+          - not_null
+          
+      - name: sales_ytd
+        description: "Sales in the territory year to date."
+        
+      - name: sales_last_year
+        description: "Sales in the territory the previous year."
+        
+      - name: cost_ytd
+        description: "Business costs in the territory year to date."
+        
+      - name: cost_last_year
+        description: "Business costs in the territory the previous year."
+          
+      - name: source_updated_at
+        description: "Timestamp of the last update of the record in the original data source."
+        tests:
+          - not_null

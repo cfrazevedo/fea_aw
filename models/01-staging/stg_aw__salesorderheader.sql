@@ -10,7 +10,6 @@ with
 
         select
             cast(salesorderid as string) as sales_order_id
-            , {{ dbt_utils.generate_surrogate_key(['sales_order_id']) }} as sales_order_sk
             , cast(revisionnumber as int) as revision_number
             , try_cast(orderdate as timestamp) as order_date
             , try_cast(duedate as timestamp) as due_date
@@ -20,7 +19,6 @@ with
             , cast(purchaseordernumber as string) as purchase_order_number
             , cast(accountnumber as string) as account_number
             , cast(customerid as string) as customer_id
-            , {{ dbt_utils.generate_surrogate_key(['customer_id']) }} as customer_fk
             , cast(salespersonid as string) as sales_person_id
             , cast(territoryid as string) as territory_id
             , cast(billtoaddressid as string) as bill_to_address_id

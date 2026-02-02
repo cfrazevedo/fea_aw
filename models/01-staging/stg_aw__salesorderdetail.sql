@@ -10,13 +10,10 @@ with
 
         select
             cast(salesorderid as string) as sales_order_id
-            , {{ dbt_utils.generate_surrogate_key(['sales_order_id']) }} as sales_order_fk
             , cast(salesorderdetailid as string) as sales_order_detail_id
-            , {{ dbt_utils.generate_surrogate_key(['sales_order_detail_id']) }} as sales_sk
             , cast(carriertrackingnumber as string) as carrier_tracking_number
             , cast(orderqty as int) as order_quantity
             , cast(productid as string) as product_id
-            , {{ dbt_utils.generate_surrogate_key(['product_id']) }} as product_fk
             , cast(specialofferid as string) as special_offer_id
             , cast(unitprice as float) as unit_price
             , cast(unitpricediscount as float) as unit_price_discount

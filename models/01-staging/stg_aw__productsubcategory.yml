@@ -1,0 +1,33 @@
+version: 2
+
+models:
+  - name: stg_aw__productsubcategory
+    description: "Staging model for product subcategory from database"
+    
+    columns:
+      - name: product_subcategory_id
+        description: "Primary key for Product Subcategory."
+        tests:
+          - unique
+          - not_null
+          
+      - name: product_category_id
+        description: "Foreign key for Product Category."
+        tests:
+          - not_null
+          
+      - name: product_subcategory_name
+        description: "Name of the product subcategory."
+        tests:
+          - not_null
+              
+      - name: rowguid
+        description: "ROWGUIDCOL number uniquely identifying the record. Used to support a merge replication sample."
+        tests:
+          - unique
+          - not_null
+          
+      - name: modified_date
+        description: "Date and time the record was last updated."
+        tests:
+          - not_null

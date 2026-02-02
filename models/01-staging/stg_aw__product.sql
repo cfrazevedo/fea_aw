@@ -10,7 +10,6 @@ with
 
         select
             cast(productid as string) as product_id
-            , {{ dbt_utils.generate_surrogate_key(['product_id']) }} as product_sk
             , cast(`name` as string) as product_name
             , cast(productnumber as string) as product_number
             , cast(makeflag as string) as make_flag

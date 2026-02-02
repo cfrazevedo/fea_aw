@@ -1,0 +1,46 @@
+version: 2
+
+models:
+  - name: dim_sales_reason
+    description: "This model creates a dimension table for sales reasons, including a surrogate key and additional columns."
+    columns:
+      - name: sales_reason_sk
+        description: "Surrogate key for the sales reason dimension, generated from 'sales_order_id' and 'sales_order_id'."
+        tests:
+          - not_null
+          - unique
+
+      - name: sales_order_id
+        description: "Foreign key referencing to fact_sales."
+        tests:
+          - not_null
+
+      - name: sales_reason_id
+        description: "Identifier for the sales reason."
+        tests:
+          - not_null
+        
+      - name: sales_reason_name
+        description: "Description of the sales reason: as price, quality, etc."
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+
+      - name: sales_reason_type
+        description: "Type of sales reason: Marketing, Promotion and Others. "
+        tests:
+          - not_null
+          - dbt_utils.not_empty_string
+  
+      - name: source_updated_at
+        description: "Timestamp when the raw source record was last updated."
+
+      - name: updated_at
+        description: "Timestamp when the record was last updated in this model."
+
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - sales_order_id
+            - sales_reason_id
+            - sales_reason_sk

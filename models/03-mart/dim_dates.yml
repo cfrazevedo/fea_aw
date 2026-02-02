@@ -1,0 +1,128 @@
+version: 2
+
+models:
+  - name: dim_dates
+    description: "Date dimension with complete temporal information for analysis"
+    columns:
+      - name: date_day
+        description: "Date of the day."
+        tests:
+          - not_null
+          - unique
+
+      - name: prior_date_day
+        description: "Date of the previous day."
+
+      - name: next_date_day
+        description: "Date of the next day."
+
+      - name: prior_year_date_day
+        description: "Date of the same day in the previous year."
+
+      - name: prior_year_over_year_date_day
+        description: "Date of the same day in the previous year, adjusted for the previous year."
+
+      - name: day_of_week
+        description: "Day of the week number (1=Sunday, 7=Saturday)."
+
+      - name: day_of_week_iso
+        description: "ISO week day number (1=Monday, 7=Sunday)."
+
+      - name: day_of_week_name
+        description: "Full name of the day of the week (e.g., Monday)."
+
+      - name: day_of_week_name_short
+        description: "Abbreviated name of the day of the week (e.g., Mon)."
+
+      - name: day_of_month
+        description: "Day of the month number (1-31)."
+
+      - name: day_of_year
+        description: "Day of the year number (1-366)."
+
+      - name: week_start_date
+        description: "Start date of the week."
+
+      - name: week_end_date
+        description: "End date of the week."
+
+      - name: prior_year_week_start_date
+        description: "Start date of the week in the previous year."
+
+      - name: prior_year_week_end_date
+        description: "End date of the week in the previous year."
+
+      - name: week_of_year
+        description: "Week number of the year."
+
+      - name: iso_week_start_date
+        description: "Start date of the ISO week."
+
+      - name: iso_week_end_date
+        description: "End date of the ISO week."
+
+      - name: prior_year_iso_week_start_date
+        description: "Start date of the ISO week in the previous year."
+
+      - name: prior_year_iso_week_end_date
+        description: "End date of the ISO week in the previous year."
+
+      - name: iso_week_of_year
+        description: "ISO week number of the year."
+
+      - name: prior_year_week_of_year
+        description: "Week number of the year in the previous year."
+
+      - name: prior_year_iso_week_of_year
+        description: "ISO week number of the year in the previous year."
+
+      - name: month_of_year
+        description: "Month number of the year (1-12)."
+
+      - name: month_name
+        description: "Full name of the month (e.g., January)."
+
+      - name: month_name_short
+        description: "Abbreviated name of the month (e.g., Jan)."
+
+      - name: month_start_date
+        description: "Start date of the month."
+
+      - name: month_end_date
+        description: "End date of the month."
+
+      - name: prior_year_month_start_date
+        description: "Start date of the month in the previous year."
+
+      - name: prior_year_month_end_date
+        description: "End date of the month in the previous year."
+
+      - name: quarter_of_year
+        description: "Quarter of the year (1-4)."
+
+      - name: quarter_start_date
+        description: "Start date of the quarter."
+
+      - name: quarter_end_date
+        description: "End date of the quarter."
+
+      - name: year_number
+        description: "Year number."
+
+      - name: year_start_date
+        description: "Start date of the year."
+
+      - name: year_end_date
+        description: "End date of the year."
+
+      - name: year_month_sort
+        description: "Month and year in 'yyyymmm' format, used to sort year_month."
+
+      - name: year_month
+        description: "Month and year in 'mmm/yyyy' string format"
+
+      - name: year_quarter_sort
+        description: "Quarter and year in 'yyyyq' format, used to sort year_quarter"
+
+      - name: year_quarter
+        description: "Quarter and year in 'Q\"q\"/yyyy' string format"
