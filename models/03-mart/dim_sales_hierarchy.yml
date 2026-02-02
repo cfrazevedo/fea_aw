@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: dim_sales_hierarchy # Nome do seu arquivo SQL (ex: int_sales_hierarchy.sql)
+  - name: dim_sales_hierarchy
     description: "This model generates surrogate keys for the sales hierarchy and combines sales order header information with sales territory details."
 
     columns:

@@ -37,7 +37,8 @@ with
 
         select
             sales_sk
-            , sales_order_fk
+            , sales_order_detail_id
+            , sales_order_id
             , product_fk
             , customer_fk
             , {{ dbt_utils.generate_surrogate_key(['sales_person_id', 'territory_id']) }} as sales_hierarchy_fk

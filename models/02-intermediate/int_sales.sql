@@ -24,9 +24,7 @@ with
     , join_detail_product as (
 
         select
-            stg_detail.sales_sk
-            , stg_detail.product_fk
-            , stg_detail.sales_order_id
+            stg_detail.sales_order_id
             , stg_detail.sales_order_detail_id
             , stg_detail.order_quantity
             , stg_detail.product_id
@@ -38,18 +36,14 @@ with
 
         from stg_detail
         left join stg_product
-        on stg_detail.product_fk = stg_product.product_sk
+        on stg_detail.product_id = stg_product.product_id
 
     )
 
     , join_detail_header as (
 
         select
-            join_detail_product.sales_sk
-            , join_detail_product.sales_order_fk
-            , join_detail_product.product_fk
-            , header.customer_fk
-            , join_detail_product.sales_order_detail_id
+            join_detail_product.sales_order_detail_id
             , join_detail_product.sales_order_id
             , join_detail_product.product_id
             , header.customer_id
@@ -72,8 +66,19 @@ with
 
         from join_detail_product
         left join header
-        on join_detail_product.sales_order_fk = header.sales_order_sk
+        on join_detail_product.sales_order_id = header.sales_order_id
 
     )
 
-select * from join_detail_header
+    generate_sk as (
+
+        select
+            {{ dbt_utils.generate_surrogate_key(['join_detail_header.sales_order_detail_id']) }} as sales_sk
+            {{ dbt_utils.generate_surrogate_key(['join_detail_header.product_id']) }} as product_fk
+            {{ dbt_utils.generate_surrogate_key(['join_detail_header.customer_id']) }} as customer_fk
+            , *
+        from join_detail_header
+        
+    )
+
+select * from generate_sk

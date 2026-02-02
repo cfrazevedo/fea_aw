@@ -45,8 +45,7 @@ with
     , join_product_model as (
 
         select
-            stg_product.product_sk
-            , stg_product.product_id
+            stg_product.product_id
             , stg_product.product_name
             , stg_product.product_number
             , stg_product.make_flag
@@ -74,8 +73,7 @@ with
     , join_product as (
 
         select
-            join_product_model.product_sk
-            , join_product_model.product_id
+            join_product_model.product_id
             , join_product_model.product_name
             , join_product_model.product_number
             , join_product_model.make_flag
@@ -103,4 +101,13 @@ with
         
     )
 
-select * from join_product
+    generate_sk as (
+
+        select
+            {{ dbt_utils.generate_surrogate_key(['join_product.product_id']) }} as product_sk
+            , *
+        from join_product
+
+    )
+
+select * from generate_sk

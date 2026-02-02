@@ -93,3 +93,9 @@ models:
         description: "Timestamp of the last update of the record in the original data source."
         tests:
           - not_null
+
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - product_id
+            - product_sk

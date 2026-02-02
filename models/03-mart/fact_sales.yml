@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: fact_sales_orders
+  - name: fact_sales
     description: "A fact table containing sales transactions including details such as product, special offer, customer, and salesperson."
     columns:
       - name: sales_sk
@@ -10,7 +10,13 @@ models:
           - unique
           - not_null
 
-      - name: sales_order_fk
+      - name: sales_order_detail_id
+        description: "Unique identifier for the order detail in the source data."
+        tests:
+          - not_null
+          - unique
+          
+      - name: sales_order_id
         description: "Foreign key referring to dim_sales_cost."
         tests:
           - not_null
@@ -19,11 +25,18 @@ models:
         description: "Foreign key referring to dim_products."
         tests:
           - not_null
+          - relationships:
+              to: ref('dim_products')
+              field: product_sk
 
       - name: customer_fk
         description: "Foreign key referring to dim_customers."
         tests:
           - not_null
+          - relationships:
+              to: ref('dim_customers')
+              field: customer_sk
+
 
       - name: sales_hierarchy_fk
         description: "Foreign key referring to the dim_sales_hierarchy."

@@ -15,11 +15,17 @@ models:
         description: "Foreign key referring to products surrogated."
         tests:
           - not_null
+          - relationships:
+              to: ref('int_product')
+              field: product_sk
 
       - name: customer_fk
         description: "Foreign key referring to customers surrogated."
         tests:
           - not_null
+          - relationships:
+              to: ref('int_customer')
+              field: customer_sk
 
       - name: sales_order_detail_id
         description: "Unique identifier for the sales order line item."
@@ -93,3 +99,9 @@ models:
 
       - name: source_updated_at
         description: "Timestamp of the last update of the record in the original data source."
+
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - sales_order_detail_id
+            - sales_sk

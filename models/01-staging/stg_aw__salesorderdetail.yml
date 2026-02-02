@@ -15,13 +15,8 @@ models:
         tests:
           - unique
           - not_null
+          - dbt_utils.not_empty_string
 
-      - name: sales_sk
-        description: "Surrogate key for sales order detail."
-        tests:
-          - unique
-          - not_null
-          
       - name: carrier_tracking_number
         description: "Shipment tracking number supplied by the shipper."
 
@@ -34,14 +29,6 @@ models:
         description: "Product sold to customer. Foreign key to Product.ProductID."
         tests:
           - not_null
-
-      - name: product_fk
-        description: "Foreign key referring to stg_product."
-        tests:
-          - not_null
-          - relationships:
-              to: ref('stg_aw__product')
-              field: product_sk
           
       - name: special_offer_id
         description: "Promotional code. Foreign key to SpecialOffer.SpecialOfferID."
@@ -66,9 +53,3 @@ models:
         description: "Date and time the record was last updated."
         tests:
           - not_null
-
-    tests:
-      - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - sales_order_detail_id
-            - sales_sk

@@ -10,6 +10,7 @@ models:
         tests:
           - unique
           - not_null
+          - dbt_utils.not_empty_string
 
       - name: person_type
         description: "Primary type of person: SC = Store Contact, IN = Individual (retail) customer, SP = Sales person, EM = Employee (non-sales), VC = Vendor contact, GC = General contact"
@@ -56,9 +57,3 @@ models:
           
       - name: modified_date
         description: "Date and time the record was last updated."
-
-    tests:
-      - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - person_id
-            - person_sk

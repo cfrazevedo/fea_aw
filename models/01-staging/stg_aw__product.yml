@@ -10,12 +10,7 @@ models:
         tests:
           - unique
           - not_null
-
-      - name: product_sk
-        description: "Surrogate key for Product."
-        tests:
-          - unique
-          - not_null
+          - dbt_utils.not_empty_string
           
       - name: product_name
         description: "Name of the product."
@@ -112,9 +107,3 @@ models:
         description: "Date and time the record was last updated."
         tests:
           - not_null
-
-    tests:
-      - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - product_id
-            - product_sk

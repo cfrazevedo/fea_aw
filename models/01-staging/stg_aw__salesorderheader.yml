@@ -10,6 +10,7 @@ models:
         tests:
           - unique
           - not_null
+          - dbt_utils.not_empty_string
           
       - name: revision_number
         description: "Incremental number to track changes to the sales order over time."
@@ -45,14 +46,6 @@ models:
         description: "Customer identification number. Foreign key to Customer.BusinessEntityID."
         tests:
           - not_null
-
-      - name: customer_fk
-        description: "Foreign key referring to stg_customers."
-        tests:
-          - not_null
-          - relationships:
-              to: ref('stg_aw__customers')
-              field: customer_sk
           
       - name: sales_person_id
         description: "Sales person who created the sales order. Foreign key to SalesPerson.BusinessEntityID."

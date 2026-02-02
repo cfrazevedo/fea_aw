@@ -14,7 +14,6 @@ models:
         description: "Primary key for the customer, sourced from the raw data."
         tests:
           - not_null
-          - dbt_utils.not_empty_string
       
       - name: person_id
         description: "Unique identifier for the person associated with the customer."

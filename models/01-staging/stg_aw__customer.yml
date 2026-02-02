@@ -10,6 +10,7 @@ models:
         tests:
           - unique
           - not_null
+          - dbt_utils.not_empty_string
           
       - name: person_id
         description: "Foreign key to Person.BusinessEntityID"

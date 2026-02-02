@@ -9,11 +9,13 @@ models:
         description: "Primary key. Foreign key to SalesOrderHeader.SalesOrderID."
         tests:
           - not_null
+          - dbt_utils.not_empty_string
           
       - name: sales_reason_id
         description: "Primary key. Foreign key to SalesReason.SalesReasonID."
         tests:
           - not_null
+          - dbt_utils.not_empty_string
           
       - name: modified_date
         description: "Date and time the record was last updated."

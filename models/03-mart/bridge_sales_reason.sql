@@ -2,14 +2,16 @@ with
 
     int_salesreason as (
 
-        select * 
+        select
+            sales_order_fk
+            , sales_reason_sk
         from {{ ref('int_salesreason') }}
 
     )
 
     , int_sales as (
 
-        select *
+        select sales_sk
         from {{ ref('int_sales') }}
 
     )

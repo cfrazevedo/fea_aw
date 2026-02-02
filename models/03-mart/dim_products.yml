@@ -16,7 +16,6 @@ models:
         tests:
           - not_null
           - unique
-          - dbt_utils.not_empty_string
 
       - name: product_name
         description: "Name of the product."
