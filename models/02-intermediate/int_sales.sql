@@ -51,7 +51,7 @@ with
         
         from stg_address
         left join stg_stateprovince
-        on stg_address = stg_stateprovince.state_province_id
+        on stg_address.state_province_id = stg_stateprovince.state_province_id
 
     )
 

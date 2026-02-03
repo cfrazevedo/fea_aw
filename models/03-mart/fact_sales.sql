@@ -57,9 +57,9 @@ with
             , standard_cost
             , line_total - (standard_cost * order_quantity) as profit
             , case
-                when join_header.card_type is null
+                when card_type is null
                     then "Another payment method"
-                else join_header.card_type
+                else card_type
             end as card_type
             , order_date
             , due_date

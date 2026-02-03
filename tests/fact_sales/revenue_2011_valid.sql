@@ -3,9 +3,9 @@ with
     revenue as (
         
         select
-            sum(total_net_sales_detail) as revenue_2011
-            12646112.16 as goal,
-            0.001 as percentage_limit
+            sum(line_total) as revenue_2011
+            , 12646112.16 as goal
+            , 0.001 as percentage_limit
         from {{ ref('fact_sales') }}
         where year(order_date) = 2011
     )

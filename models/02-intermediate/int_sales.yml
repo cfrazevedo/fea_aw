@@ -120,8 +120,8 @@ models:
       - name: card_type
         description: "Credit card name."
 
-      - name: total_net_sales_detail
-        description: "Total of products value (sub total)."
+      - name: line_total
+        description: "Total of products line (sub total)."
         tests:
           - not_null
 
