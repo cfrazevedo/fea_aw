@@ -13,6 +13,10 @@ with
             , concat(month_name_short, '/', year_number) as year_month
             , cast(concat(year_number, quarter_of_year) as int) as year_quarter_sort
             , concat('Q', quarter_of_year, '/', year_number) as year_quarter
+            , case
+                when month(date_day) > 6 then year(date_day) + 1
+                else year(date_day)
+            end as fiscal_year
 
         from dim_dates
         

@@ -1,0 +1,45 @@
+version: 2
+
+models:
+  - name: stg_aw__address
+    description: "Staging model for address from database"
+    
+    columns:
+      - name: address_id
+        description: "Primary key. Adress identification number."
+        tests:
+          - unique
+          - not_null
+          
+      - name: address_line_1
+        description: "First street address line."
+        
+      - name: address_line_2
+        description: "Second street address line."
+        
+      - name: city_name
+        description: "Name of the city."
+        tests:
+          - not_null
+        
+      - name: state_province_id
+        description: "Unique identification number for the state or province. Foreign key to StateProvince table."
+        tests:
+          - not_null
+        
+      - name: postal_code
+        description: "Postal code for the street address."
+        
+      - name: spatial_location
+        description: "Latitude and longitude of this address."
+          
+      - name: rowguid
+        description: "ROWGUIDCOL number uniquely identifying the record. Used to support a merge replication sample."
+        tests:
+          - unique
+          - not_null
+          
+      - name: modified_date
+        description: "Date and time the record was last updated."
+        tests:
+          - not_null
