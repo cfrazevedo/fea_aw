@@ -9,11 +9,11 @@ with
     renamed as (
 
         select
-            cast(addressid as string) as address_id
+            cast(addressid as int) as address_id
             , cast(addressline1 as string) as address_line_1
             , cast(addressline2 as string) as address_line_2
             , cast(city as string) as city_name
-            , cast(stateprovinceid as string) as state_province_id
+            , cast(stateprovinceid as int) as state_province_id
             , cast(postalcode as string) as postal_code
             , cast(spatiallocation as string) as spatial_location
             , cast(rowguid as string) as rowguid

@@ -9,7 +9,7 @@ with
     renamed as (
 
         select
-            cast(creditcardid as string) as credit_card_id
+            cast(creditcardid as int) as credit_card_id
             , cast(cardtype as string) as card_type
             , cast(cardnumber as string) as card_number
             , cast(expmonth as string) as exp_month

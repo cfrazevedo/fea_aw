@@ -9,7 +9,7 @@ with
     renamed as (
 
         select
-            cast(productid as string) as product_id
+            cast(productid as int) as product_id
             , cast(`name` as string) as product_name
             , cast(productnumber as string) as product_number
             , cast(makeflag as string) as make_flag
@@ -27,8 +27,8 @@ with
             , cast(productline as string) as product_line
             , cast(class as string) as product_class
             , cast(style as string) as product_style
-            , cast(productsubcategoryid as string) as product_subcategory_id
-            , cast(productmodelid as string) as product_model_id
+            , cast(productsubcategoryid as int) as product_subcategory_id
+            , cast(productmodelid as int) as product_model_id
             , cast(sellstartdate as timestamp) as sell_start_date
             , cast(sellenddate as timestamp) as sell_end_date
             , cast(discontinueddate as timestamp) as discontinued_date

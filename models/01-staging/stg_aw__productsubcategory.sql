@@ -9,8 +9,8 @@ with
     renamed as (
 
         select
-            cast(productsubcategoryid as string) as product_subcategory_id
-            , cast(productcategoryid as string) as product_category_id
+            cast(productsubcategoryid as int) as product_subcategory_id
+            , cast(productcategoryid as int) as product_category_id
             , cast(`name` as string) as product_subcategory_name
             , cast(rowguid as string) as rowguid
             , cast(modifieddate as timestamp) as modified_date
