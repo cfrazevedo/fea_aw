@@ -115,11 +115,7 @@ with
             , join_header.ship_date
             , join_detail.order_quantity
             , join_detail.unit_price
-            , case
-                when join_detail.unit_price_discount != 0
-                    then join_detail.unit_price_discount
-                else null
-            end as unit_price_discount_percentage
+            , join_detail.unit_price_discount as unit_price_discount_percentage
             , round(join_detail.unit_price_discount * join_detail.unit_price * join_detail.order_quantity, 3) as unit_price_discount_value 
             , join_detail.line_total
             , join_detail.standard_cost
@@ -140,9 +136,9 @@ with
     , generate_sk as (
 
         select
-            {{ dbt_utils.generate_surrogate_key(['join_detail_header.sales_order_detail_id']) }} as sales_sk
-            , {{ dbt_utils.generate_surrogate_key(['join_detail_header.product_id']) }} as product_fk
-            , {{ dbt_utils.generate_surrogate_key(['join_detail_header.customer_id']) }} as customer_fk
+            {{ dbt_utils.generate_surrogate_key(['sales_order_detail_id']) }} as sales_sk
+            , {{ dbt_utils.generate_surrogate_key(['product_id']) }} as product_fk
+            , {{ dbt_utils.generate_surrogate_key(['customer_id']) }} as customer_fk
             , *
             , (line_total / sum(line_total) over(partition by sales_order_id)) * tax_amount as tax_amount_portion
             , (line_total / sum(line_total) over(partition by sales_order_id)) * freight as freight_portion
