@@ -137,6 +137,11 @@ models:
         description: "Identify if that customer is new (first order) or current (not first order)."
         tests:
           - not_null
+      
+      - name: status
+        description: "Order current status. 1 = In process; 2 = Approved; 3 = Backordered; 4 = Rejected; 5 = Shipped; 6 = Cancelled"
+        tests:
+          - not_null
 
       - name: source_updated_at
         description: "Timestamp when the source of stg_sales_order_detail data was last updated."

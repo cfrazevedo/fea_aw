@@ -69,6 +69,7 @@ with
                 when is_first_order = TRUE then 'new'
                 else 'current'
             end as customer_type
+            , `status`
             , source_updated_at
             , current_timestamp() as updated_at
         

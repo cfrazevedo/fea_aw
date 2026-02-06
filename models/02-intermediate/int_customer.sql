@@ -16,6 +16,13 @@ with
         from {{ ref('stg_aw__person') }}
 
     )
+    
+    , stg_store as (
+
+        select *
+        from {{ ref('stg_aw__store' ) }}
+
+    )
 
     , join_customer as (
 
@@ -24,13 +31,16 @@ with
             , stg_customer.person_id
             , stg_person.person_name as customer_name
             , stg_customer.store_id
+            , stg_store.store_name
             , stg_customer.territory_id
             , stg_customer.modified_date as source_updated_at
 
         from stg_customer
         left join stg_person
         on stg_customer.person_id = stg_person.person_id 
-        
+        left join stg_store
+        on stg_customer.store_id = stg_store.store_id
+
     )
 
     , generate_sk as (

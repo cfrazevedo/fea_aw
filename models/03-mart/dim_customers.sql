@@ -7,29 +7,38 @@ with
 
     )
 
-    , stg_store as (
+    , base as (
 
-        select *
-        from {{ ref('stg_aw__store' ) }}
+        select
+            *
+            , customer_id
+            , customer_name
+            , count(*) over (partition by customer_name) as name_count
+        
+        from customer
 
     )
 
     , final as (
 
         select
-            customer.customer_sk
-            , customer.customer_id
-            , customer.person_id
-            , customer.customer_name
-            , customer.store_id
-            , stg_store.store_name
-            , customer.territory_id
-            , customer.source_updated_at
+            customer_sk
+            , customer_id
+            , person_id
+            , customer_name
+            , case
+                when name_count > 1 then
+                    concat(customer_name, ' (', cast(customer_id as string), ')')
+                else
+                    customer_name
+            end as customer_display
+            , store_id
+            , store_name
+            , territory_id
+            , source_updated_at
             , current_timestamp() as updated_at
         
-        from customer
-        left join stg_store
-        on customer.store_id = stg_store.store_id
+        from base
         
     )
 

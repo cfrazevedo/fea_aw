@@ -26,6 +26,9 @@ models:
       - name: store_id
         description: "Foreign key to Store.BusinessEntityID."
 
+      - name: store_name
+        description: "Name of the store."
+
       - name: territory_id
         description: "ID of the territory in which the customer is located. Foreign key to SalesTerritory.SalesTerritoryID."
           
