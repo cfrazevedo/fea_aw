@@ -79,47 +79,49 @@ with
     , base as (
 
         select
-            *
-            , count(*) over (partition by sales_person_name) as name_count
-        
+            sales_person_name
+            , count(sales_person_id) as sales_person_count
         from join_saleshierarchy
+        group by sales_person_name
 
     )
 
     , final as (
 
         select
-            {{ dbt_utils.generate_surrogate_key(['sales_person_id', 'territory_id']) }} as sales_hierarchy_sk
-            , sales_person_id
-            , sales_person_name
+            {{ dbt_utils.generate_surrogate_key(['js.sales_person_id', 'js.territory_id']) }} as sales_hierarchy_sk
+            , js.sales_person_id
+            , js.sales_person_name
             , case
-                when name_count > 1 then
-                    concat(sales_person_name, ' (', cast(sales_person_id as string), ')')
+                when b.sales_person_count > 1 then
+                    concat(js.sales_person_name, ' (', cast(js.sales_person_id as string), ')')
                 else
-                    sales_person_name
+                    js.sales_person_name
             end as sales_person_display
-            , person_type
-            , sales_quota
-            , bonus
-            , commission_pct
-            , sales_ytd
-            , sales_last_year
-            , territory_id
-            , territory_name
-            , country_region_code
+            , js.person_type
+            , js.sales_quota
+            , js.bonus
+            , js.commission_pct
+            , js.sales_ytd
+            , js.sales_last_year
+            , js.territory_id
+            , js.territory_name
+            , js.country_region_code
             , case 
-                when upper(trim(country_region_code)) = 'US' then 'USA'
-                when upper(trim(country_region_code)) = 'CA' then 'Canada'
-                when upper(trim(country_region_code)) = 'FR' then 'France'
-                when upper(trim(country_region_code)) = 'DE' then 'Germany'
-                when upper(trim(country_region_code)) = 'AU' then 'Australia'
-                when upper(trim(country_region_code)) = 'GB' then 'United Kingdom'
+                when upper(trim(js.country_region_code)) = 'US' then 'USA'
+                when upper(trim(js.country_region_code)) = 'CA' then 'Canada'
+                when upper(trim(js.country_region_code)) = 'FR' then 'France'
+                when upper(trim(js.country_region_code)) = 'DE' then 'Germany'
+                when upper(trim(js.country_region_code)) = 'AU' then 'Australia'
+                when upper(trim(js.country_region_code)) = 'GB' then 'United Kingdom'
                 else 'Unknown'
             end as country
-            , territory_group
-            , source_updated_at
+            , js.territory_group
+            , js.source_updated_at
             , current_timestamp() as updated_at
-        from base
+        from join_saleshierarchy as js
+        left join base as b
+        on js.sales_person_name = b.sales_person_name
         
     )
 
