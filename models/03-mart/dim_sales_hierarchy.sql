@@ -76,12 +76,28 @@ with
 
     )
 
+    , base as (
+
+        select
+            *
+            , count(*) over (partition by sales_person_name) as name_count
+        
+        from join_saleshierarchy
+
+    )
+
     , final as (
 
         select
             {{ dbt_utils.generate_surrogate_key(['sales_person_id', 'territory_id']) }} as sales_hierarchy_sk
             , sales_person_id
             , sales_person_name
+            , case
+                when name_count > 1 then
+                    concat(sales_person_name, ' (', cast(sales_person_id as string), ')')
+                else
+                    sales_person_name
+            end as sales_person_display
             , person_type
             , sales_quota
             , bonus
@@ -103,7 +119,7 @@ with
             , territory_group
             , source_updated_at
             , current_timestamp() as updated_at
-        from join_saleshierarchy
+        from base
         
     )
 

@@ -70,11 +70,18 @@ with
                 else 'current'
             end as customer_type
             , `status`
+            , case
+                when `status` = 1 then 'In process'
+                when `status` = 2 then 'Approved'
+                when `status` = 3 then 'Backordered'
+                when `status` = 4 then 'Rejected'
+                when `status` = 5 then 'Shipped'
+                when `status` = 6 then 'Cancelled'
+            end as status_name 
             , source_updated_at
             , current_timestamp() as updated_at
         
         from join_sales
-        where `status` = 5
         
     )
 

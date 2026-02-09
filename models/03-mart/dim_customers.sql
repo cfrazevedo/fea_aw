@@ -11,8 +11,6 @@ with
 
         select
             *
-            , customer_id
-            , customer_name
             , count(*) over (partition by customer_name) as name_count
         
         from customer
