@@ -7,6 +7,15 @@ with
 
     )
 
+    , base as (
+
+        select
+            *
+            , count(*) over (partition by customer_name) as name_count
+        from customer
+
+    )
+
     , final as (
 
         select
@@ -14,14 +23,20 @@ with
             , customer_id
             , person_id
             , customer_name
-            , concat(store_name, ' (', customer_name, ')') as customer_display
+            , case
+                when name_count > 1 then
+                    concat(customer_name, ' (', cast(customer_id as string), ')')
+                else
+                    customer_name
+            end as customer_display
             , store_id
             , store_name
+            , concat(store_name, ' (', customer_name, ')') as store_display
             , territory_id
             , source_updated_at
             , current_timestamp() as updated_at
         
-        from customer
+        from base
         
     )
 

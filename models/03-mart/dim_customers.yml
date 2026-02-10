@@ -22,7 +22,7 @@ models:
         description: "Name of the customer."
 
       - name: customer_display
-        description: "Store (customer) format"
+        description: "Name of the customer (+ ID, if have more than one)."
 
       - name: store_id
         description: "Unique identifier for the store associated with the customer."
@@ -30,6 +30,9 @@ models:
       - name: store_name
         description: "Name of the store."
 
+      - name: store_display
+        description: "Store (customer) format"
+        
       - name: territory_id
         description: "Unique identifier for the territory associated with the customer."
         tests:
