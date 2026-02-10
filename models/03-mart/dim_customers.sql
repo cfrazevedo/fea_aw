@@ -21,7 +21,7 @@ with
             , source_updated_at
             , current_timestamp() as updated_at
         
-        from base
+        from customer
         
     )
 
