@@ -44,13 +44,23 @@ with
             , {{ dbt_utils.generate_surrogate_key(['sales_person_id', 'territory_id']) }} as sales_hierarchy_fk
             , sales_person_id
             , territory_id
+            , city_name
+            , state_province_name
             , order_quantity
             , unit_price
             , unit_price_discount_percentage
             , unit_price_discount_value
-            , (order_quantity * unit_price) - unit_price_discount_value as total_net_sales_detail
+            , line_total
+            , tax_amount_portion
+            , freight_portion
+            , line_total + tax_amount_portion + freight_portion as subtotal_portion
             , standard_cost
-            , total_net_sales_detail - standard_cost as profit
+            , line_total - (standard_cost * order_quantity) as profit
+            , case
+                when card_type is null
+                    then "Another payment method"
+                else card_type
+            end as card_type
             , order_date
             , due_date
             , ship_date
@@ -59,11 +69,19 @@ with
                 when is_first_order = TRUE then 'new'
                 else 'current'
             end as customer_type
+            , `status`
+            , case
+                when `status` = 1 then 'In process'
+                when `status` = 2 then 'Approved'
+                when `status` = 3 then 'Backordered'
+                when `status` = 4 then 'Rejected'
+                when `status` = 5 then 'Shipped'
+                when `status` = 6 then 'Cancelled'
+            end as status_name 
             , source_updated_at
             , current_timestamp() as updated_at
         
         from join_sales
-        where `status` = 5
         
     )
 

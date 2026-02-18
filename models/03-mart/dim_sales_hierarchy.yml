@@ -19,6 +19,9 @@ models:
         tests:
           - not_null
       
+      - name: sales_person_display
+        description: "Name of the sales person (+ ID, if have more than one)."
+      
       - name: person_type
         description: "Type of person associated with the salesperson, such as SC (Store Contact), IN (Individual), SP (Sales Person), EM (Employee), VC (Vendor Contact), GC (General Contact)."
 

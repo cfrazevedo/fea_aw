@@ -9,7 +9,7 @@ with
     renamed as (
 
         select
-            cast(productmodelid as string) as product_model_id
+            cast(productmodelid as int) as product_model_id
             , cast(`name` as string) as product_model_name
             , cast(catalogdescription as string) as catalog_description
             , cast(instructions as string) as instructions

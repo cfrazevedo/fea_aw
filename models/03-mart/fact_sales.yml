@@ -54,11 +54,25 @@ models:
         tests:
           - not_null
 
+      - name: city_name
+        description: "Order city name."
+        tests:
+          - not_null
+
+      - name: state_province_name
+        description: "Order state or province name."
+        tests:
+          - not_null
+      
       - name: order_quantity
         description: "Quantity of items ordered."
+        tests:
+          - not_null
 
       - name: unit_price
         description: "Price per unit."
+        tests:
+          - not_null
 
       - name: unit_price_discount_percentage
         description: "Discount percentage applied to the unit price."
@@ -66,14 +80,40 @@ models:
       - name: unit_price_discount_value
         description: "Discount value applied to sub total."
 
-      - name: total_net_sales_detail
-        description: "Total of products value (sub total)."
+      - name: line_total
+        description: "Total of products value in line (sub total)."
+        tests:
+          - not_null
+
+      - name: tax_amount_portion
+        description: "Tax amount line proportion."
+        tests:
+          - not_null
+
+      - name: freight_portion
+        description: "Shipping cost line proportion."
+        tests:
+          - not_null
+
+      - name: subtotal_portion
+        description: "SubTotal line proportion."
+        tests:
+          - not_null
 
       - name: standard_cost
         description: "Standard cost per unit."
+        tests:
+          - not_null
         
       - name: profit
-        description: "Profit per unit."
+        description: "Profit line."
+        tests:
+          - not_null
+          
+      - name: card_type
+        description: "Credit card name."
+        tests:
+          - not_null
 
       - name: order_date
         description: "Date when the order was placed."
@@ -95,6 +135,11 @@ models:
       
       - name: customer_type
         description: "Identify if that customer is new (first order) or current (not first order)."
+        tests:
+          - not_null
+      
+      - name: status
+        description: "Order current status. 1 = In process; 2 = Approved; 3 = Backordered; 4 = Rejected; 5 = Shipped; 6 = Cancelled"
         tests:
           - not_null
 

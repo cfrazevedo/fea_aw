@@ -9,8 +9,8 @@ with
     renamed as (
 
         select
-            cast(businessentityid as string) as sales_person_id
-            , cast(territoryid as string) as territory_id
+            cast(businessentityid as int) as sales_person_id
+            , cast(territoryid as int) as territory_id
             , cast(salesquota as decimal(19,4)) as sales_quota
             , cast(bonus as decimal(19,4)) as bonus
             , cast(commissionpct as decimal(19,4)) as commission_pct

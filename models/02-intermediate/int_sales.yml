@@ -92,8 +92,46 @@ models:
         tests:
           - not_null
 
+      - name: tax_amount
+        description: "Tax amount."
+        tests:
+          - not_null
+
+      - name: freight
+        description: "Shipping cost."
+        tests:
+          - not_null
+
       - name: status
-        description: "Status of the order (e.g., 5 for completed orders)."
+        description: "Order current status. 1 = In process; 2 = Approved; 3 = Backordered; 4 = Rejected; 5 = Shipped; 6 = Cancelled"
+        tests:
+          - not_null
+      
+      - name: city_name
+        description: "Order city name."
+        tests:
+          - not_null
+
+      - name: state_province_name
+        description: "Order state or province name."
+        tests:
+          - not_null
+          
+      - name: card_type
+        description: "Credit card name."
+
+      - name: line_total
+        description: "Total of products line (sub total)."
+        tests:
+          - not_null
+
+      - name: tax_amount_portion
+        description: "Tax amount total proportion."
+        tests:
+          - not_null
+
+      - name: freight_portion
+        description: "Shipping cost total proportion."
         tests:
           - not_null
 

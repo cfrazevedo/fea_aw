@@ -104,7 +104,7 @@ with
     , generate_sk as (
 
         select
-            {{ dbt_utils.generate_surrogate_key(['join_product.product_id']) }} as product_sk
+            {{ dbt_utils.generate_surrogate_key(['product_id']) }} as product_sk
             , *
         from join_product
 

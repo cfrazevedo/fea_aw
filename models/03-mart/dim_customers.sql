@@ -7,32 +7,36 @@ with
 
     )
 
-    , salesperson as (
+    , base as (
 
         select
-            sales_person_id
-            , concat(first_name, ' ', last_name) as sales_person_name
-
-        from {{ ref('int_salesperson') }}
+            *
+            , count(*) over (partition by customer_name) as name_count
+        from customer
 
     )
 
     , final as (
 
         select
-            customer.customer_sk
-            , customer.customer_id
-            , customer.person_id
-            , salesperson.sales_person_name as customer_name
-            , customer.store_id
-            , customer.store_name
-            , customer.territory_id
-            , customer.source_updated_at
+            customer_sk
+            , customer_id
+            , person_id
+            , customer_name
+            , case
+                when name_count > 1 then
+                    concat(customer_name, ' (', cast(customer_id as string), ')')
+                else
+                    customer_name
+            end as customer_display
+            , store_id
+            , store_name
+            , concat(store_name, ' (', customer_name, ')') as store_display
+            , territory_id
+            , source_updated_at
             , current_timestamp() as updated_at
         
-        from customer
-        left join salesperson
-        on customer.person_id = salesperson.sales_person_id 
+        from base
         
     )
 

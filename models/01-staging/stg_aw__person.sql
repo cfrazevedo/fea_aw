@@ -9,7 +9,7 @@ with
     renamed as (
 
         select
-            cast(businessentityid as string) as person_id
+            cast(businessentityid as int) as person_id
             , cast(persontype as string) as person_type
             , cast(namestyle as string) as name_style
             , cast(title as string) as title
