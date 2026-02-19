@@ -13,3 +13,6 @@ Try running the following commands:
 - Join the [dbt community](https://getdbt.com/community) to learn from other analytics engineers
 - Find [dbt events](https://events.getdbt.com) near you
 - Check out [the blog](https://blog.getdbt.com/) for the latest news on dbt's development and best practices
+
+### Power BI Online Dashboard:
+https://app.powerbi.com/view?r=eyJrIjoiZThjZjFlZWQtYjc4NC00ZmYzLWE3N2ItYTIyYjRmZjAxMTRkIiwidCI6IjY1OWNlMmI4LTA3MTQtNDE5OC04YzM4LWRjOWI2MGFhYmI1NyJ9
